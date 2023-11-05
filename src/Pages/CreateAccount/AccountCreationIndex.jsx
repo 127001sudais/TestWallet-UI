@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // CreateAccount components
 // arranged according to the account creation steps
@@ -11,9 +11,20 @@ import Agreement from "../../components/CreateAccount/Agreement/Agreement";
 // Error page
 import ErrorIndex from "../Error/ErrorIndex";
 
+// custom hook
+import useIndexedDB from "../../hooks/useIndexedDB";
+
 function AccountCreationIndex() {
   const [step, setStep] = useState(1);
   const [userData, setUserData] = useState({});
+
+  const saveUserData = useIndexedDB();
+
+  useEffect(() => {
+    if (step === 5) {
+      saveUserData(userData);
+    }
+  }, [step, userData]);
 
   const nextStep = (data) => {
     setUserData((prevData) => ({ ...prevData, ...data }));
