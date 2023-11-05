@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+
+//pages
+import FirstScreenIndex from "./Pages/FirstScreen/FirstScreenIndex";
+
+// This is a parent component for CreateAccount/ components
+import AccountCreationIndex from "./Pages/CreateAccount/AccountCreationIndex";
+
+//create-account section
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<FirstScreenIndex />} />
+        <Route path="/create-account" element={<AccountCreationIndex />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
