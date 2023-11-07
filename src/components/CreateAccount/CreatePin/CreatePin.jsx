@@ -5,8 +5,15 @@ import PinEntry from "../../PIN/PinEntry";
 // Import Header
 import Header from "../../Header/Header";
 
+//
+import Notice from "../../Notice/Notice";
+
+// css
+import "../../../styles/CreateAccount/CreatePin.css";
+
 function CreatePin({ nextStep, prevStep }) {
   const [pin, setPin] = useState("");
+  const [error, setError] = useState("");
 
   const handleButtonClick = (value) => {
     if (pin.length < 6) {
@@ -20,7 +27,14 @@ function CreatePin({ nextStep, prevStep }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    nextStep({ pin });
+    if (pin.length === 6) {
+      nextStep({ pin });
+    } else {
+      setError("Please enter a 6-digit PIN");
+      setTimeout(() => {
+        document.querySelector(".error-message").classList.add("show");
+      }, 0);
+    }
   };
 
   return (
@@ -28,10 +42,17 @@ function CreatePin({ nextStep, prevStep }) {
       <Header />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center">
+          <p className="font-semibold">Create PIN</p>
           <PinEntry
             onClick={handleButtonClick}
             onBackSpaceClick={handleBackSpaceClick}
           />
+          {error && (
+            <div className="error-message">
+              {" "}
+              <Notice text={error} />
+            </div>
+          )}
           {/* button begins here */}
           <div className="flex mt-2 font-semibold justify-between w-full md:w-1/2 lg:w-1/3">
             {/* previous button begins here */}
