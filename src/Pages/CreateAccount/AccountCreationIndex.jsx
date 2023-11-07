@@ -14,6 +14,9 @@ import ErrorIndex from "../Error/ErrorIndex";
 // custom hook
 import useIndexedDB from "../../hooks/useIndexedDB";
 
+// Layout
+import PageLayout from "../../containers/PageLayout/PageLayout";
+
 function AccountCreationIndex() {
   const [step, setStep] = useState(1);
   const [userData, setUserData] = useState({});
@@ -39,23 +42,46 @@ function AccountCreationIndex() {
 
   switch (step) {
     case 1:
-      return <CreateUserName nextStep={nextStep} />;
+      return (
+        <PageLayout>
+          {" "}
+          <CreateUserName nextStep={nextStep} />
+        </PageLayout>
+      );
     case 2:
-      return <CreatePin nextStep={nextStep} prevStep={prevStep} />;
+      return (
+        <PageLayout>
+          <CreatePin nextStep={nextStep} prevStep={prevStep} />
+        </PageLayout>
+      );
     case 3:
       return (
-        <ConfirmPin
-          nextStep={nextStep}
-          prevStep={prevStep}
-          pin={userData.pin}
-        />
+        <PageLayout>
+          <ConfirmPin
+            nextStep={nextStep}
+            prevStep={prevStep}
+            pin={userData.pin}
+          />
+        </PageLayout>
       );
     case 4:
-      return <RecoveryPhrase nextStep={nextStep} prevStep={prevStep} />;
+      return (
+        <PageLayout>
+          <RecoveryPhrase nextStep={nextStep} prevStep={prevStep} />
+        </PageLayout>
+      );
     case 5:
-      return <Agreement nextStep={nextStep} prevStep={prevStep} />;
+      return (
+        <PageLayout>
+          <Agreement nextStep={nextStep} prevStep={prevStep} />
+        </PageLayout>
+      );
     default:
-      return <ErrorIndex />;
+      return (
+        <PageLayout>
+          <ErrorIndex />
+        </PageLayout>
+      );
   }
 }
 
