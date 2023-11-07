@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const openDatabase = () => {
   return new Promise((resolve, reject) => {
-    const openRequest = indexedDB.open("MVP", 2);
+    const openRequest = indexedDB.open("PAYRAIL", 3);
 
     openRequest.onupgradeneeded = (event) => {
       const db = event.target.result;
@@ -24,11 +24,17 @@ const saveData = (db, data) => {
     // start a new transaction with readwrite access to the userData object store
     const transaction = db.transaction("userData", "readwrite");
 
-    // Get a reference to the userDat object store
+    // Get a reference to the userData object store
     const store = transaction.objectStore("userData");
 
+    const accountData = {
+      ...data,
+      balance: 1000,
+      transactions: [],
+    };
+
     // Add the data to the object store without a key
-    const request = store.add(data);
+    const request = store.add(accountData);
 
     // If the transaction completes successfully, resolve the promise with the result
     transaction.oncomplete = (event) => {
