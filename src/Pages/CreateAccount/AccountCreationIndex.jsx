@@ -23,15 +23,13 @@ function AccountCreationIndex() {
 
   const saveUserData = useIndexedDB();
 
-  useEffect(() => {
-    if (step === 5) {
-      saveUserData(userData);
-    }
-  }, [step, userData]);
-
   const nextStep = (data) => {
     setUserData((prevData) => ({ ...prevData, ...data }));
     setStep((prevStep) => prevStep + 1);
+
+    if (step === 5) {
+      saveUserData(userData);
+    }
   };
 
   const prevStep = () => {
@@ -44,7 +42,6 @@ function AccountCreationIndex() {
     case 1:
       return (
         <PageLayout>
-          {" "}
           <CreateUserName nextStep={nextStep} />
         </PageLayout>
       );
