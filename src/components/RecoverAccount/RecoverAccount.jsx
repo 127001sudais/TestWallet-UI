@@ -1,7 +1,13 @@
 import React from "react";
 
+import SrpInput from "./SrpInput";
+
 function RecoverAccount() {
-  return <div>RecoverAccount</div>;
+  return (
+    <>
+      <SrpInput />
+    </>
+  );
 }
 
 export default RecoverAccount;
