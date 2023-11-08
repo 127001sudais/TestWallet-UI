@@ -3,9 +3,9 @@ import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 // importing test data
-import { people } from "../../../Data/people";
+import { people } from "../../data/payRail-MVP";
 
-export default function TestSearchBar({ setSelectedPerson }) {
+export default function SearchBar({ setSelectedPerson }) {
   const [selected, setSelected] = useState();
   const [query, setQuery] = useState("");
 

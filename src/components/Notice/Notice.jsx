@@ -8,7 +8,7 @@ function Notice({ text }) {
     <>
       <div className="flex bg-gray-200 rounded-md text-xs mt-2">
         <WarningAmberRoundedIcon className="h-5 w-5 m-auto" />
-        <p className="flex-1">{text}</p>
+        <p className="flex-1 text-center leading-6">{text}</p>
       </div>
     </>
   );
