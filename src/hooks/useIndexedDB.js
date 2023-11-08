@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import authenticateUser from "./authenticateUser";
+
 const openDatabase = () => {
   return new Promise((resolve, reject) => {
     const openRequest = indexedDB.open("PAYRAIL", 3);
@@ -48,6 +50,29 @@ const saveData = (db, data) => {
   });
 };
 
+const getUserData = (db, id) => {
+  return new Promise((resolve, reject) => {
+    // start a new transaction with readonly access to the userData object store
+    const transaction = db.transaction("userData", "readonly");
+
+    // Get a reference to the userData object store
+    const store = transaction.objectStore("userData");
+
+    // Get the data for the user with the specified id
+    const request = store.get(id);
+
+    // If the transaction completes successfully, resolve the promise with the result
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+
+    // If the transaction fails, reject the promise with the error
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
+};
+
 const useIndexedDB = () => {
   const [db, setDb] = useState(null);
 
@@ -61,7 +86,19 @@ const useIndexedDB = () => {
     }
   };
 
-  return saveUserData;
+  const fetchUserData = (id) => {
+    if (db) {
+      return getUserData(db, id);
+    }
+  };
+
+  const loginUser = (userName, pin) => {
+    if (db) {
+      return authenticateUser(db, userName, pin);
+    }
+  };
+
+  return { saveUserData, fetchUserData, loginUser };
 };
 
 export default useIndexedDB;
