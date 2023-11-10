@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // modal
 import ContactsTransactionBox from "../../Modals/Home/ContactsTransactionBox";
+import PayBox from "../../Modals/Home/PayBox";
 
 // custom Hook
 import useModal from "../../hooks/useModal";
@@ -10,14 +11,34 @@ import useModal from "../../hooks/useModal";
 import { people } from "../../data/payRail-MVP";
 
 function ContactList({ selectedPerson = {} }) {
+  // Is used for <ContactsTransactionBox/> modal
   const { isOpen, openModal, closeModal, toggleModal } = useModal();
+
+  // Is used for <PayBox/> modal
+  const {
+    isOpen: isPayBoxOpen,
+    openModal: openPayBoxModal,
+    closeModal: closePayBoxModal,
+    toggleModal: togglePayBoxModal,
+  } = useModal();
 
   const [selected, setSelected] = useState(null);
 
-  //
   const handleModalOpen = (data) => {
     setSelected(data);
     openModal();
+  };
+
+  let pressTimer;
+
+  const handleMouseDown = () => {
+    pressTimer = window.setTimeout(() => {
+      openPayBoxModal(); // open <PayBox/> modal after a long click
+    }, 1000);
+  };
+
+  const handleMouseUp = () => {
+    clearTimeout(pressTimer); // Cancel the timer if the mouse button is released
   };
 
   // date sorting
@@ -28,9 +49,6 @@ function ContactList({ selectedPerson = {} }) {
           .sort((a, b) => new Date(b.date) - new Date(a.date))
       : people.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  // console.log("people", people.length);
-  // console.log("sortedData", sortedData.length);
-  // console.log("selectedPerson", selectedPerson);
   return (
     <div className="mt-3">
       {/* checks if people array is empty then it will display "No Transactions Yet" */}
@@ -39,6 +57,8 @@ function ContactList({ selectedPerson = {} }) {
       ) : (
         sortedData.map((data, i) => (
           <div
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
             className="flex flex-col"
             key={i}
             onClick={() => handleModalOpen(data)}
@@ -59,7 +79,7 @@ function ContactList({ selectedPerson = {} }) {
             })()}
 
             {/*  for the name and amount */}
-            <div className="flex text-sm justify-between border-b-2 border-dotted border-gray-400">
+            <div className="flex text-sm justify-between border-b-2 border-dotted border-gray-900">
               <p>{data.name}</p>
 
               {/* for the MVP no color change on the amount wether it is positive or negative */}
@@ -90,6 +110,11 @@ function ContactList({ selectedPerson = {} }) {
           toggleModal={toggleModal}
           person={selected}
         />
+      )}
+
+      {/* modal for opening the PayBox */}
+      {isPayBoxOpen && (
+        <PayBox isOpen={isPayBoxOpen} toggleModal={togglePayBoxModal} />
       )}
     </div>
   );

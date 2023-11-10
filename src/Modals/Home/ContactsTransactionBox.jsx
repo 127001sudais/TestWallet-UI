@@ -7,7 +7,7 @@ function ContactsTransactionBox({ person, isOpen, toggleModal }) {
   return (
     <>
       <ModalLayout
-        Title="Transaction Box"
+        title="Transaction Box"
         isOpen={isOpen}
         toggleModal={toggleModal}
       >
