@@ -39,7 +39,10 @@ function Content() {
         <RecieveFromExternalWallet isOpen={isOpen} toggleModal={toggleModal} />
       )}
 
-      <Link className="bg-gray-200 rounded-md border px-2 py-1 my-1">
+      <Link
+        to="/about"
+        className="bg-gray-200 rounded-md border px-2 py-1 my-1"
+      >
         About
       </Link>
     </div>

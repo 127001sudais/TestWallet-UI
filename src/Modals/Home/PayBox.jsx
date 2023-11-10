@@ -10,6 +10,7 @@ function PayBox({ isOpen, toggleModal }) {
   const gasCost = 0.01;
 
   const totalCost = amount + gasCost;
+
   const handleSend = () => {
     console.log("send button is clicked");
   };
