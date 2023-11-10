@@ -1,5 +1,8 @@
 import React from "react";
 
+// icon
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+
 // notice
 import RecieveFromExternalWalletNotice from "./RecieveFromExternalWalletNotice";
 

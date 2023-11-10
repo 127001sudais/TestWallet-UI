@@ -1,8 +1,14 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 
+// custom hook to handle modal
+import useModal from "../../hooks/useModal";
+
+// modal
+import RecieveFromExternalWallet from "../../Modals/RecieveFromExternalWallet/RecieveFromExternalWallet";
+
 function Content() {
+  const { isOpen, openModal, closeModal, toggleModal } = useModal();
   return (
     <div className="flex flex-col font-semibold ">
       <Link
@@ -23,9 +29,15 @@ function Content() {
         Recover old account
       </Link>
 
-      <button className="bg-gray-200 rounded-md border px-2 py-1 my-1">
+      <button
+        onClick={openModal}
+        className="bg-gray-200 rounded-md border px-2 py-1 my-1"
+      >
         Recieve from external wallet(pro)
       </button>
+      {isOpen && (
+        <RecieveFromExternalWallet isOpen={isOpen} toggleModal={toggleModal} />
+      )}
 
       <Link className="bg-gray-200 rounded-md border px-2 py-1 my-1">
         About
