@@ -58,7 +58,7 @@ function PayBox({ isOpen, toggleModal }) {
         </div>
 
         {/* sen button */}
-        <div className="mt-4 rounded-md bg-black ">
+        <div className=" mt-5 bg-black rounded-md">
           {" "}
           <Button
             style={{ color: "white" }}
