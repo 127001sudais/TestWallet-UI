@@ -37,6 +37,18 @@ function ConfirmPin({ nextStep, prevStep }) {
   return (
     <>
       <Header />
+      {/* Error message begins here */}
+      <div
+        className={
+          error
+            ? "p-1 transition ease-in-out duration-500 transform translate-y-0"
+            : "p-1 transition ease-in-out duration-500 transform -translate-y-full"
+        }
+      >
+        {error && <Notice text={error} />}
+      </div>
+      {/* Error message ends here */}
+
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center">
           <p className="font-semibold">Confirm new PIN</p>
@@ -44,14 +56,6 @@ function ConfirmPin({ nextStep, prevStep }) {
             onClick={handleButtonClick}
             onBackSpaceClick={handleBackSpaceClick}
           />
-
-          {/* error message display */}
-          {error && (
-            <div className="error-message">
-              {" "}
-              <Notice text={error} />
-            </div>
-          )}
 
           {/* button begins here */}
           <div className="flex mt-2 font-semibold justify-between w-full md:w-1/2 lg:w-1/3">
