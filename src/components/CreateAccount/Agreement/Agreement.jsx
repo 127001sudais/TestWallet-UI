@@ -9,9 +9,6 @@ import Header from "../../Header/Header";
 // Notice
 import Notice from "../../Notice/Notice";
 
-// css
-import "../../../styles/CreateAccount/Agreement.css";
-
 function Agreement({ nextStep, prevStep }) {
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
@@ -26,15 +23,25 @@ function Agreement({ nextStep, prevStep }) {
       nextStep();
     } else {
       setError("You must agree to the terms and conditions to proceed");
-      setTimeout(() => {
-        document.querySelector(".error-message").classList.add("show");
-      }, 0);
     }
   };
   return (
     <>
       <Header />
-      <form className="mt-4" onSubmit={handleSubmit}>
+
+      {/* Error message begins here */}
+      <div
+        className={
+          error
+            ? "p-2 transition ease-in-out duration-500 transform translate-y-0"
+            : "p-2 transition ease-in-out duration-500 transform -translate-y-full"
+        }
+      >
+        {error && <Notice text={error} />}
+      </div>
+      {/* Error message ends here */}
+
+      <form className="mt-4 flex flex-col items-center" onSubmit={handleSubmit}>
         <div className="bg-gray-200 rounded-md p-1">
           <h1 className="font-bold text-center">Terms and conditions</h1>
           <div className="flex">
@@ -55,11 +62,7 @@ function Agreement({ nextStep, prevStep }) {
             I agree to the terms and conditions
           </label>
         </div>
-        {error && (
-          <div className="error-message">
-            <Notice text={error} />
-          </div>
-        )}
+
         {/* button begins here */}
         <div className="flex mt-12 font-semibold justify-between w-full md:w-1/2 lg:w-1/3">
           {/* previous button begins here */}

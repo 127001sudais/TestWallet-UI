@@ -18,7 +18,10 @@ function Content() {
         My 12 words
       </Link>
 
-      <Link to="" className="bg-gray-200 rounded-md border px-2 py-1 my-1">
+      <Link
+        to="/change-pin"
+        className="bg-gray-200 rounded-md border px-2 py-1 my-1"
+      >
         Change PIN
       </Link>
 

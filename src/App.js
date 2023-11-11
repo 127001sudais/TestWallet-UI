@@ -8,6 +8,7 @@ import HomeIndex from "./Pages/Home/HomeIndex";
 import RecoverAccountIndex from "./Pages/RecoverAccount/RecoverAccountIndex";
 import My12WordsIndex from "./Pages/My12Words/My12WordsIndex";
 import AboutIndex from "./Pages/About/AboutIndex";
+import ChangePinIndex from "./Pages/ChangePin/ChangePinIndex";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/home" element={<HomeIndex />} />
         <Route path="/my-12-words" element={<My12WordsIndex />} />
         <Route path="/about" element={<AboutIndex />} />
+        <Route path="/change-pin" element={<ChangePinIndex />} />
       </Routes>
     </BrowserRouter>
   );

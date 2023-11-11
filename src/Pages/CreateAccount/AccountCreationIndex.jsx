@@ -8,14 +8,12 @@ import ConfirmPin from "../../components/CreateAccount/ConfirmPin/ConfirmPin";
 import RecoveryPhrase from "../../components/CreateAccount/RecoveryPhrase/RecoveryPhrase";
 import Agreement from "../../components/CreateAccount/Agreement/Agreement";
 
-// Error page
-import ErrorIndex from "../Error/ErrorIndex";
-
 // custom hook
 import useIndexedDB from "../../hooks/useIndexedDB";
 
 // Layout
 import PageLayout from "../../containers/PageLayout/PageLayout";
+import FirstScreenIndex from "../FirstScreen/FirstScreenIndex";
 
 function AccountCreationIndex() {
   const [step, setStep] = useState(1);
@@ -74,11 +72,7 @@ function AccountCreationIndex() {
         </PageLayout>
       );
     default:
-      return (
-        <PageLayout>
-          <ErrorIndex />
-        </PageLayout>
-      );
+      return <FirstScreenIndex />;
   }
 }
 

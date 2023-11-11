@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-import PinEntry from "../../PIN/PinEntry";
+// notice
+import Notice from "../Notice/Notice";
 
-// Import Header
-import Header from "../../Header/Header";
+// pin entry
+import PinEntry from "../PIN/PinEntry";
 
-//
-import Notice from "../../Notice/Notice";
+// Header
+import Header from "../Header/Header";
 
-function CreatePin({ nextStep, prevStep }) {
+function EnterNewPin({ nextStep, prevStep }) {
   const [pin, setPin] = useState("");
   const [error, setError] = useState("");
 
@@ -28,32 +29,29 @@ function CreatePin({ nextStep, prevStep }) {
       nextStep({ pin });
     } else {
       setError("Please enter a 6-digit PIN");
+      // setTimeout(() => {
+      //   document.querySelector(".error-message").classList.add("show");
+      // }, 0);
     }
   };
-
   return (
     <>
       <Header />
-
-      {/* Error message begins here */}
-      <div
-        className={
-          error
-            ? "p-1 transition ease-in-out duration-500 transform translate-y-0"
-            : "p-1 transition ease-in-out duration-500 transform -translate-y-full"
-        }
-      >
-        {error && <Notice text={error} />}
-      </div>
-      {/* Error message ends here */}
-
-      <form className="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center">
-          <p className="font-semibold">Create PIN</p>
+          <p className="font-semibold">Enter new PIN</p>
           <PinEntry
             onClick={handleButtonClick}
             onBackSpaceClick={handleBackSpaceClick}
           />
+
+          {/* error message display */}
+          {error && (
+            <div className="error-message">
+              {" "}
+              <Notice text={error} />
+            </div>
+          )}
 
           {/* button begins here */}
           <div className="flex mt-2 font-semibold justify-between w-full md:w-1/2 lg:w-1/3">
@@ -83,4 +81,4 @@ function CreatePin({ nextStep, prevStep }) {
   );
 }
 
-export default CreatePin;
+export default EnterNewPin;

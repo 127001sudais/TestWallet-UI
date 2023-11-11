@@ -9,9 +9,6 @@ import { isValidUserName } from "../../../utils/CreateAccount/validUtils";
 // Error message display
 import Notice from "../../Notice/Notice";
 
-// Styles
-import "../../../styles/CreateAccount/CreateUserName.css";
-
 function CreateUserName({ nextStep }) {
   const [userName, setUserName] = useState("");
   const [error, setError] = useState("");
@@ -22,9 +19,6 @@ function CreateUserName({ nextStep }) {
       nextStep({ userName });
     } else {
       setError("Username can only contain letter,numbers and full stops");
-      setTimeout(() => {
-        document.querySelector(".error-message").classList.add("show");
-      }, 0);
     }
   };
 
@@ -35,7 +29,20 @@ function CreateUserName({ nextStep }) {
   return (
     <>
       <Header />
-      <form className="form-container" onSubmit={handleSubmit}>
+
+      {/* Error message begins here */}
+      <div
+        className={
+          error
+            ? "p-2 transition ease-in-out duration-500 transform translate-y-0"
+            : "p-2 transition ease-in-out duration-500 transform -translate-y-full"
+        }
+      >
+        {error && <Notice text={error} />}
+      </div>
+      {/* Error message ends here */}
+
+      <form className="" onSubmit={handleSubmit}>
         <div className="mt-3 flex flex-col items-center">
           {/* userName input area begins here */}
           <div>
@@ -47,19 +54,12 @@ function CreateUserName({ nextStep }) {
               placeholder="Enter user name"
             />
           </div>
-          {/* Error message begins here */}
-          {error && (
-            <div className="p-2 error-message">
-              <Notice text={error} />
-            </div>
-          )}
-          {/* Error message ends here */}
           {/* userName input ends here */}
 
           {/* submit button begins here */}
-          <div className="submit-button">
+          <div className="mt-3">
             <input
-              className="rounded-md border text-center bg-gray-200"
+              className="rounded-md border text-center  bg-gray-200 p-1"
               type="submit"
               value="submit"
             />
