@@ -35,7 +35,7 @@ export default function ModalLayout({ title, children, isOpen, toggleModal }) {
                 <div className="">
                   <button
                     type="button"
-                    className=" text-md font-medium "
+                    className="bg-black rounded-md text-md text-white font-medium focus:outline-none focus:ring-white"
                     onClick={toggleModal}
                   >
                     <CloseIcon />

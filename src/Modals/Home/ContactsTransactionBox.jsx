@@ -14,7 +14,7 @@ function ContactsTransactionBox({ person, isOpen, toggleModal }) {
         <div className="px-2">
           {person && (
             <>
-              <h2>{person.name}</h2>
+              <p className="font-semibold">{person.name}</p>
               {Array.isArray(person.transactions) && (
                 <>
                   {person.transactions.map((transaction, i) => (
