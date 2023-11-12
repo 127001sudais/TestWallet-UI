@@ -50,7 +50,7 @@ function PinPad({ onClick, onBackSpaceClick }) {
 
 PinPad.propTypes = {
   onClick: PropTypes.func.isRequired,
-  onBackspaceClick: PropTypes.func.isRequired,
+  onBackSpaceClick: PropTypes.func.isRequired,
 };
 
 export default PinPad;

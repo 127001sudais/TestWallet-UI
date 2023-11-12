@@ -19,7 +19,7 @@ function PinEntry({ onClick, onBackSpaceClick }) {
   };
 
   return (
-    <div className="mt-2">
+    <div data-testid="PinEntry" className="mt-2">
       <PinDisplay pin={pin} />
       <PinPad
         onClick={handleButtonClick}

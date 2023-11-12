@@ -13,7 +13,7 @@ function Header() {
   const { isOpen, openModal, closeModal, toggleModal } = useModal();
   return (
     <>
-      <div className="flex justify-between">
+      <div data-testid="Header" className="flex justify-between">
         <p className="flex-grow text-center text-2xl italic font-bold">
           PAY-RAIL
         </p>
