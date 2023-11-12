@@ -10,7 +10,7 @@ export default function CustomDisclosure({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <div className="w-full ">
+      <div data-testid="custom-disclosure" className="w-full">
         {/* button which contains text begins here */}
         <button
           onClick={() => setIsOpen(!isOpen)}
