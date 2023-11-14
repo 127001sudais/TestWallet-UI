@@ -6,6 +6,7 @@ import PayBox from "../../Modals/Home/PayBox";
 
 // custom Hook
 import useModal from "../../hooks/useModal";
+import useLongPress from "../../hooks/useLongPress";
 
 // dummy data
 import { people } from "../../data/payRail-MVP";
@@ -24,22 +25,15 @@ function ContactList({ selectedPerson = {} }) {
 
   const [selected, setSelected] = useState(null);
 
-  const handleModalOpen = (data) => {
-    setSelected(data);
-    openModal();
-  };
-
-  let pressTimer;
-
-  const handleMouseDown = () => {
-    pressTimer = window.setTimeout(() => {
-      openPayBoxModal(); // open <PayBox/> modal after a long click
-    }, 1000);
-  };
-
-  const handleMouseUp = () => {
-    clearTimeout(pressTimer); // Cancel the timer if the mouse button is released
-  };
+  const longPressActions = useLongPress(
+    () => {
+      openPayBoxModal();
+    },
+    (data) => {
+      setSelected(data);
+      openModal();
+    }
+  );
 
   // date sorting
   const sortedData =
@@ -56,13 +50,7 @@ function ContactList({ selectedPerson = {} }) {
         <div className=" text-center pt-4">No Contacts Yet</div>
       ) : (
         sortedData.map((data, i) => (
-          <div
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            className="flex flex-col"
-            key={i}
-            onClick={() => handleModalOpen(data)}
-          >
+          <div {...longPressActions(data)} key={i}>
             {/* this is for date and time */}
             {(() => {
               const lastTransaction =
